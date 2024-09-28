@@ -27,3 +27,34 @@ By the end of this tutorial, you will be able to learn how to:
 - Use cloud-init to download all necessary packages through doctl.
 - Create a new droplet using doctl.
 
+### Task 1: Creating SSH key
+
+**Overview:** This task will help you create your own SSH key pair (a private and public key) which will be used to connect to your digital ocean droplet.
+
+1. **Make a SSH key**
+Use the following command,
+```
+ssh-keygen -t ed25519 -f ~/.ssh/doctl-key -C "USERNAME"
+```
+
+In this case the USERNAME can be your username or your email. 
+-  ssh-keygen: OpenSSH authentication key utility that is built in into your OS machine.
+-  -t: Specifies the type of key to create. In this case it would be the default "ed25519". 
+-  -f: *filename* Specifies the filename of the key file.
+-  ~: The home directory.
+- -C: Provides a new comment.
+
+It will prompt you for a password, however just press *Enter* twice to have no password for your SSH key.
+
+2. **Check if SSH key is in our system**
+Now we should check if we have our SSH key in our ssh directory, type this command in your terminal
+```
+ls ~/.ssh
+```
+to check if files "doctl-key", which is your private key (do not share this) and "doctl-key.pub", which is your public key to use to make the droplet, are listed.
+
+- cd: This is used to change directory.
+- .ssh: The SSH key directory.
+- ls: This is used to list all the files and directories in the current directory that you are in.
+
+Congratulations, you have now created your own SSH keys.
