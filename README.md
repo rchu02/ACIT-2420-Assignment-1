@@ -45,24 +45,23 @@ ssh-keygen -t ed25519 -f ~/.ssh/doctl-key -C "USERNAME"
 ```
 
 In this case the USERNAME can be your username or your email. 
--  ssh-keygen: OpenSSH authentication key utility that is built in into your OS machine.
--  -t: Specifies the type of key to create. In this case it would be the default "ed25519". 
--  -f: *filename* Specifies the filename of the key file.
--  ~: The home directory.
-- -C: Provides a new comment.
+-  `ssh-keygen`: OpenSSH authentication key utility that is built in into your OS machine. (7)
+-  `-t`: Specifies the type of key to create. In this case it would be the default "ed25519". (7)
+-  `-f`: *filename* Specifies the filename of the key file. (7)
+-  `~`: The home directory. (7)
+- `-C`: Provides a new comment. (7)
 
-It will prompt you for a password, however just press *Enter* twice to have no password for your SSH key.
+It will prompt you for a password, however just press `Enter` twice to have no password for your SSH key.
 
 2. **Check if SSH key is in our system**
 Now we should check if we have our SSH key in our ssh directory, type this command in your terminal
 ```
 ls ~/.ssh
 ```
-to check if files "doctl-key", which is your private key (do not share this) and "doctl-key.pub", which is your public key to use to make the droplet, are listed.
+to check if files `doctl-key`, which is your private key (do not share this) and `doctl-key.pub`, which is your public key to use to make the droplet, are listed.
 
-- cd: This is used to change directory.
-- .ssh: The SSH key directory.
-- ls: This is used to list all the files and directories in the current directory that you are in.
+- `cd`: This is used to change directory. (7)
+- `ls`: This is used to list all the files and directories in the current directory that you are in. (7)
 
 Congratulations, you have now created your own SSH keys.
 
@@ -100,11 +99,11 @@ Copy your personal access token from the DigitalOcean site, then go to your arch
 ```
 doctl auth init --context <NAME>
 ```
-"NAME" is name you give you give to save the token.
-- doctl auth init: Initializes doctl to use a specific account (3).
-- --context: Specify a custom authentication context name (3).
+`<NAME>` is name you give you give to save the token.
+- `doctl auth init`: Initializes doctl to use a specific account (3).
+- `--context`: Specify a custom authentication context name (3).
 
-Now there will be a prompt 
+Now there will be a prompt,
 
 <img src="assests/enter_access_token.png" alt="enter_access_token" width="250"/>
 
@@ -116,8 +115,8 @@ Now we will switch to your account by running
 ```
 doctl auth switch --context <NAME>
 ```
-Where "Name" is the input that you used when you initialized your authorization. 
-- switch: Allows you to switch between authentication contexts you have already created (3).
+Where `<NAME>` is the input that you used when you initialized your authorization. 
+- `switch`: Allows you to switch between authentication contexts you have already created (3).
 
 Finally check if your account is connected by running
 ```
@@ -140,15 +139,15 @@ First use the command,
 cat ~/.ssh/doctl-key.pub
 ```
 your public SSH key should show up. Now copy the key.
-- cat: Show contents of a file all at once (3).
+- `cat`: Show contents of a file all at once (3).
 
 Then type the command (**Note: Do not copy this code as your clipboard will forget your SSH key that copied in the previous step**)
 ```
 doctl compute ssh-key "<KEYNAME>" create --public-key "<Paste your key in here>"
 ```
 where you name your key and paste your public SSH key in the following brackets.
-- doctl compute ssh-key create: Adds a new SSH key to your account (3).
-- --public-key: Key contents (3).
+- `doctl compute ssh-key create`: Adds a new SSH key to your account (3).
+- `--public-key`: Key contents (3).
 
 ### Task 3: Creating a Cloud-init file
 This task will help you create and configure the Cloud-init file.
