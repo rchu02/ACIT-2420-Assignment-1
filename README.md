@@ -2,13 +2,15 @@
 
 ### Table of Contents
 
-1. Introduction
-2. Task 1: Creating SSH key
-3. Task 2: Installing Doctl
-4. Task 3: Task 3: Creating a cloud-init file
-5. Task 4: Making the droplet with the cloud-init file
+1. [Introduction](#introduction)
+2. Task 1: [Creating SSH key](#task-1-creating-ssh-key)
+3. Task 2: [Installing Doctl and Connecting DigitalOcean using an API](#installing-doctl-and-connecting-digitalocean-using-an-api)
+4. Task 3: [Creating a cloud-init file](#creating-a-cloudinit-file)
+5. Task 4: [Making the droplet with the cloud-init file](#making-the-droplet-with-the-cloudinit-file)
+6. Task 5: [Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
+7. [Sources](#sources)
 
-### Introduction
+## Introduction
 
 This tutorial will guide you through the steps that allows you to make your own Arch Linux Droplet using doctl. 
 
@@ -34,7 +36,7 @@ By the end of this tutorial, you will be able to learn how to:
 - Use cloud-init to download all necessary packages.
 - Create a new droplet using doctl.
 
-### Task 1: Creating SSH key
+## Task 1: Creating SSH key
 
 **Overview:** This task will help you create your own SSH key pair (a private and public key) which will be used to connect to your digital ocean droplet.
 
@@ -46,7 +48,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/doctl-key -C "USERNAME"
 
 In this case the USERNAME can be your username or your email. 
 -  `ssh-keygen`: OpenSSH authentication key utility that is built in into your OS machine. (7)
--  `-t`: Specifies the type of key to create. In this case it would be the default "ed25519". (7)
+-  `-t`: Specifies the type of key to create. In this case it would be the default `ed25519`. (7)
 -  `-f`: *filename* Specifies the filename of the key file. (7)
 -  `~`: The home directory. (7)
 - `-C`: Provides a new comment. (7)
@@ -65,7 +67,7 @@ to check if files `doctl-key`, which is your private key (do not share this) and
 
 Congratulations, you have now created your own SSH keys.
 
-### Task 2: Installing Doctl and Connecting DigitalOcean using an API.
+## Task 2: Installing Doctl and Connecting DigitalOcean using an API.
 
 **Overview**: This task will help guide you to install doctl on your terminal and creating your first droplet using doctl.
 
@@ -149,7 +151,7 @@ where you name your key and paste your public SSH key in the following brackets.
 - `doctl compute ssh-key create`: Adds a new SSH key to your account (3).
 - `--public-key`: Key contents (3).
 
-### Task 3: Creating a Cloud-init file
+## Creating a Cloud-init file
 This task will help you create and configure the Cloud-init file.
 
 Before you start, we need to download a package called `neovim` which allows us to edit text files (5). Run the command,
