@@ -12,33 +12,39 @@
 
 This tutorial will guide you through the steps that allows you to make your own Arch Linux Droplet using doctl. 
 
-What is Arch Linux?
+### What is Arch Linux?
+
 Arch Linux is an open source Linux distribution which is a minimal base system, that can be configured by the users for what they want[^1].
 
-What is a SSH key? 
+### What is a SSH key? 
+
 A key so that you can securely connect between your device and something else, in this case we are going to connect to a VM. You have a private and public key for this.
 
-What is a Droplet?
+### What is a Droplet?
+
 Droplets from DigitalOcean are Linux-based Virtual Machines(VMs) that run on virtualized hardware[^2].
 
-What is Doctl?
+### What is Doctl?
+
 Doctl is the DigitalOcean command line interface (CLI)[^3].
 
-What is Cloud-init?
+### What is Cloud-init?
+
 Cloud-init is a tool that handles a range of tasks from setting hostname, configuring network interfaces, etc when a new instance is created. Mainly we will be using it to run a script[^5].
 
 By the end of this tutorial, you will be able to learn how to:
 - Create your own SSH keys on your local machine.
 - Install doctl on your Arch Linux machine.
-- Connect your Digital Ocean account to your Arch Linux machine using doctl. 
+- Connect your DigitalOcean account to your Arch Linux machine using doctl. 
 - Use cloud-init to download all necessary packages.
 - Create a new droplet using doctl.
 
 ## Task 1: Creating SSH key
 
-**Overview:** This task will help you create your own SSH key pair (a private and public key) which will be used to connect to your digital ocean droplet.
+This task will help you create your own SSH key pair (a private and public key) which will be used to connect to your DigitalOcean droplet.
 
 1. **Make a SSH key**
+
 Use the following command,
 ```
 ssh-keygen -t ed25519 -f ~/.ssh/doctl-key -C "USERNAME"
@@ -54,6 +60,7 @@ In this case the USERNAME can be your username or your email.
 It will prompt you for a password, however just press `Enter` twice to have no password for your SSH key.
 
 2. **Check if SSH key is in our system**
+
 Now we should check if we have our SSH key in our ssh directory, type this command in your terminal
 ```
 ls ~/.ssh
@@ -70,6 +77,7 @@ Congratulations, you have now created your own SSH keys[^4].
 **Overview**: This task will help guide you to install doctl on your terminal and creating your first droplet using doctl.
 
 1. **Install Doctl**
+
 First run 
 ```
 sudo pacman -S doctl
@@ -78,6 +86,7 @@ sudo pacman -S doctl
 - pacman: Package manager from arch
 
 2. **Create an API token**
+
 Now we will create an API token and make it so it grants account access to doctl. Go to your DigitalOcean account, then on the left hand dashboard, click on **API**[^8].
 
 <img src="assests/dashboard.png" alt="dashboard" width="150"/>
@@ -96,7 +105,8 @@ Select **Full Access**, this will grant you the token all scopes available.
 
 Click **Generate Token**
 
-3. **Now use the API token to grant access to Doctl**
+3. **Use the API token to grant access to Doctl**
+
 Copy your personal access token from the DigitalOcean site, then go to your arch terminal and running the command.
 ```
 doctl auth init --context <NAME>
@@ -134,7 +144,7 @@ Where you can get the following details of your account profile (3):
 
 Confirm the details and now you have connected your account to your arch.
 
-4. Connect your SSH key to DigitalOcean
+4. **Connect your SSH key to DigitalOcean**
 
 First use the command,
 ```
@@ -163,31 +173,41 @@ Before you start, we need to download a package called `neovim` which allows us 
 sudo pacman -S neovim
 ```
 
-1. Run the command,
+1. **Make a directory**
+
+Run the command,
 ```
 mkdir droplet
 ```
 - `mkdir`: Make directory[^7].
 We want to make a directory as we don't want to clutter our home directory.
 
-2. Now run the command,
+2. **Change to the droplet directory** 
+
+Run the command,
 ```
 cd droplet
 ```
 
-3. Now run the command,
+3. **Create a file**
+
+Run the command,
 ```
 touch cloud-init
 ```
 - `touch`: Makes a file[^7].
 
-4. Then run,
+4. **Open the file using nvim**
+
+Run,
 ```
 nvim cloud-init
 ```
 To open the cloud-init file and edit it using *nvim*.
 
-5. Now press `i` on your keyboard and paste ALL of the code below in the file,
+5. **Configure your Cloud-init**
+
+Now press `i` on your keyboard and paste ALL of the code below in the file,
 ```
 #cloud-config
 users:
@@ -221,7 +241,9 @@ Press `esc` and type `:wq` to exit save the contents and exit nvim.
 	- `tmux`: Terminal multiplier[^3].
 - `disable_root`: This determines if root login is disabled or not[^5].
 
-6. Once again you need to get your SSH key using `cat ~/.ssh/doctl-key.pub`. Now copy the key and once again run `nvim cloud-init` and paste your key inside the `ssh-authorized-keys` like, 
+6. **Paste your SSH key inside Cloud-init**
+
+Once again you need to get your SSH key using `cat ~/.ssh/doctl-key.pub`. Now copy the key and once again run `nvim cloud-init` and paste your key inside the `ssh-authorized-keys` like, 
 ```
 ssh-authorized-keys:
       - ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA name
@@ -236,7 +258,9 @@ Now that you are done making a cloud-init file, you will now proceed to make a d
 >[!Note]
 >Make sure **NOT** to run *clear* when running these following commands as you will need to have the ID's for your *project, arch image,* and *ssh-key* to copy and paste.
 
-1. Check if you have multiple projects on your Digital Ocean account by running,
+1. **Checking projects in DigitalOcean**
+
+Check if you have multiple projects on your DigitalOcean account by running,
 ```
 doctl projects list --format Name,OwnerUUID
 ```
@@ -248,7 +272,9 @@ This command will show all your project names with each respective UUID,
 
 Now decide which project you want to use, for the droplet that you are going to make.
 
-2. If you have made multiple custom images on your DigitalOcean account, run this command to find your Arch Linux image.
+2. **Finding Arch Linux image ID**
+
+If you have made multiple custom images on your DigitalOcean account, run this command to find your Arch Linux image.
 ```
 doctl compute image list-user --format ID,Distribution | grep -i arch
 ```
@@ -261,7 +287,9 @@ Make sure you have your ID and the name "Arch Linux" as the output.
 
 <img src="assests/image_list.png" alt="image_list" width="450"/>
 
-1. Run this command to find the ID of the *doctl* key you made and connected with your DigitalOcean account.
+3. **Find ID of doctl-key**
+
+Run this command to find the ID of the `doctl` key you made and connected with your DigitalOcean account.
 ```
 doctl compute ssh-key list --format ID,Name | grep doctl
 ```
@@ -274,7 +302,9 @@ Make sure you have the ID and the name of your SSH key that you made earlier.
 
 <img src="assests/ssh_list.png" alt="ssh_list" width="450"/>
 
-4. Run this command to make your droplet,
+4. **Making the Droplet**
+
+Run this command to make your droplet,
 ```
 doctl compute droplet create <droplet name> --size s-1vcpu-1gb-amd --region Sfo3 --user-data-file ~/droplet/cloud-init --project-id <Paste your Project UUID> --image <Paste your Arch Linux image ID> --ssh-keys <Paste your SSH key ID>
 ```
@@ -292,7 +322,9 @@ doctl compute droplet create <droplet name> --size s-1vcpu-1gb-amd --region Sfo3
 - `--image`: An ID specifying the image to create the Droplet[^3].
 - `--ssh-keys`: A list of SSH keys to embed in the Droplet's root account[^3]
 
-5. Now let's confirm that we made our droplet by running the following command,
+5. **Confirmation**
+
+Now let's confirm that we made our droplet by running the following command,
 ```
 doctl compute droplet list --format ID,Name,PublicIPv4 | grep <droplet name>
 ```
@@ -304,13 +336,17 @@ You have now completed in making your droplet.
 ## Task 5: Connecting the droplet using the VM
 You will now connect to your new droplet by using the VM.
 
-1. Run the following command 
+1. **Edit the config file**
+
+Run the following command 
 ```
 nvim ~/.ssh/config
 ```
 You will now be editing the configuration file inside the `.ssh` directory.
 
-2. Now paste the following code inside,
+2. **Adding VM access**
+
+Now paste the following code inside,
 ```
 Host <Name for start up>
   HostName <IPv4 address that you checked earlier>
@@ -322,13 +358,17 @@ Host <Name for start up>
 ```
 Now save the changes and exit.
 
-3. Now run the command,
+3. **Initial log in**
+
+Now run the command,
 ```
 ssh -i .ssh/doctl-key <Username>@<Public IPv4 Address>
 ```
 You should now be logged in the VM.
 
-4. If you want to continue to log in the VM, just run
+4. **Logging in**
+
+If you want to continue to log in the VM, just run
 ```
 ssh <Name for start up>
 ```
