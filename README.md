@@ -1,15 +1,15 @@
 # How to Set Up a Arch Linux Droplet Using Doctl
 
 ## Table of Contents
-- [How to Set Up a Arch Linux Droplet Using Doctl](#how-to-set-up-a-arch-linux-droplet-using-doctl)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Task 1: Creating SSH key](#task-1-creating-ssh-key)
-  - [Task 2: Installing Doctl and Connecting DigitalOcean using an API.](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
-  - [Task 3: Creating a Cloud-init file](#task-3-creating-a-cloud-init-file)
-  - [Task 4: Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloud-init-file)
-  - [Task 5: Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
-  - [Sources](#sources)
+- [How to Set Up a Arch Linux Droplet Using Doctl]
+- [Table of Contents]
+- [Introduction](#introduction)
+- [Task 1: Creating SSH key](#task-1-creating-ssh-key)
+- [Task 2: Installing Doctl and Connecting DigitalOcean using an API.](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
+- [Task 3: Creating a Cloud-init file](#task-3-creating-a-cloud-init-file)
+- [Task 4: Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloud-init-file)
+- [Task 5: Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
+- [Sources](#sources)
 
 ## Introduction
 
