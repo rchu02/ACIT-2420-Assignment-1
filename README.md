@@ -76,9 +76,10 @@ Now we will create an API token and make it so it grants account access to doctl
 <img src="assests/dashboard.png" alt="dashboard" width="150"/>
 
 Click **Generate New Token**
-<img src="assests/generate_new_token.png.png" alt="generate_new_token" width="450"/>
+<img src="assests/generate_new_token.png" alt="generate_new_token" width="450"/>
 
 Enter your token name
+
 <img src="assests/token_name.png" alt="token_name" width="450"/>
 
 Select **Full Access**, this will grant you the token all scopes available
@@ -96,9 +97,12 @@ doctl auth init --context <NAME>
 - --context: Specify a custom authentication context name (3).
 
 Now there will be a prompt 
+
 <img src="assests/enter_access_token.png" alt="enter_access_token" width="250"/>
+
 Paste your personal access token from the DigitalOcean site. You should get a confirmation: 
-<img src="assests/validating_token.png" alt="dashboard" width="450"/>
+
+<img src="assests/validating_token.png" alt="dashboard" width="200"/>
 
 Now we will switch to your account by running 
 ```
