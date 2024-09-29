@@ -2,13 +2,14 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. Task 1: [Creating SSH key](#task-1-creating-ssh-key)
-3. Task 2: [Installing Doctl and Connecting DigitalOcean using an API](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
-4. Task 3: [Creating a cloud-init file](#task-3-creating-a-cloud-init-file)
-5. Task 4: [Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloud-init-file)
-6. Task 5: [Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
-7. [Sources](#sources)
+- [How to Set Up a Arch Linux Droplet Using Doctl](#how-to-set-up-a-arch-linux-droplet-using-doctl)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Task 1: Creating SSH key](#task-1-creating-ssh-key)
+  - [Task 2: Installing Doctl and Connecting DigitalOcean using an API.](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
+  - [Task 3: Creating a Cloud-init file](#task-3-creating-a-cloud-init-file)
+  - [Task 4: Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloud-init-file)
+  - [Sources](#sources)
 
 ## Introduction
 
@@ -242,7 +243,8 @@ This command will show all your project names with each respective UUID,
 - `doctl projects list`: List details for your DigitalOcean projects[^3].
 - `--format`: Flag to return only the `Name` and `OwnerUUID` in this case[^3].
 
-![[Screenshot 2024-09-28 at 5.48.47 PM.png|500]]
+<img src="assests/project_list.png" alt="project_list" width="450"/>
+
 Now decide which project you want to use, for the droplet that you are going to make.
 
 2. If you have made multiple custom images on your DigitalOcean account, run this command to find your Arch Linux image.
@@ -255,9 +257,10 @@ doctl compute image list-user --format ID,Distribution | grep -i arch
 - `-i `: Ignores case sensitivity[^7].
 
 Make sure you have your ID and the name "Arch Linux" as the output.
-![[Screenshot 2024-09-28 at 5.45.19 PM.png|500]]
 
-3. Run this command to find the ID of the *doctl* key you made and connected with your DigitalOcean account.
+<img src="assests/image_list.png" alt="image_list" width="450"/>
+
+1. Run this command to find the ID of the *doctl* key you made and connected with your DigitalOcean account.
 ```
 doctl compute ssh-key list --format ID,Name | grep doctl
 ```
@@ -267,7 +270,8 @@ doctl compute ssh-key list --format ID,Name | grep doctl
 > If you made it under a different name, change the `doctl` part of the command after > *grep* to whatever name you made it as.
 
 Make sure you have the ID and the name of your SSH key that you made earlier.
-![[Screenshot 2024-09-28 at 5.47.12 PM.png|500]]
+
+<img src="assests/ssh_list.png" alt="ssh_list" width="450"/>
 
 4. Run this command to make your droplet,
 ```
@@ -304,14 +308,14 @@ You have now completed in making your droplet.
 
 [^3]: https://docs.digitalocean.com/reference/doctl/reference/ 
 
-[^4]: https://cloud.google.com/compute/docs/connect/create-ssh-keys 
+4. https://cloud.google.com/compute/docs/connect/create-ssh-keys 
 
 [^5]: https://docs.cloud-init.io/en/latest/explanation/introduction.html 
 
-[^6]: https://docs.digitalocean.com/reference/doctl/how-to/install/ 
+6. https://docs.digitalocean.com/reference/doctl/how-to/install/ 
 
 [^7]: https://ss64.com/bash/ 
 
-[^8]: https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
+8. https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
 
 [^9]: https://www.redhat.com/sysadmin/pipes-command-line-linux 
