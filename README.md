@@ -1,7 +1,6 @@
 # How to Set Up a Arch Linux Droplet Using Doctl
 
 ## Table of Contents
-
 - [How to Set Up a Arch Linux Droplet Using Doctl](#how-to-set-up-a-arch-linux-droplet-using-doctl)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
@@ -9,6 +8,7 @@
   - [Task 2: Installing Doctl and Connecting DigitalOcean using an API.](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
   - [Task 3: Creating a Cloud-init file](#task-3-creating-a-cloud-init-file)
   - [Task 4: Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloud-init-file)
+  - [Task 5: Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
   - [Sources](#sources)
 
 ## Introduction
@@ -66,7 +66,7 @@ to check if files `doctl-key`, which is your private key (do not share this) and
 - `cd`: This is used to change directory[^7].
 - `ls`: This is used to list all the files and directories in the current directory that you are in[^7].
 
-Congratulations, you have now created your own SSH keys.
+Congratulations, you have now created your own SSH keys[^4].
 
 ## Task 2: Installing Doctl and Connecting DigitalOcean using an API.
 
@@ -81,7 +81,8 @@ sudo pacman -S doctl
 - pacman: Package manager from arch
 
 2. **Create an API token**
-Now we will create an API token and make it so it grants account access to doctl. Go to your DigitalOcean account, then on the left hand dashboard, click on **API**
+Now we will create an API token and make it so it grants account access to doctl. Go to your DigitalOcean account, then on the left hand dashboard, click on **API**[^8].
+
 <img src="assests/dashboard.png" alt="dashboard" width="150"/>
 
 Click **Generate New Token**
@@ -92,13 +93,14 @@ Enter your token name
 
 <img src="assests/token_name.png" alt="token_name" width="450"/>
 
-Select **Full Access**, this will grant you the token all scopes available
+Select **Full Access**, this will grant you the token all scopes available.
+
 <img src="assests/full_access.png" alt="full_access" width="450"/>
 
 Click **Generate Token**
 
 3. **Now use the API token to grant access to Doctl**
-Copy your personal access token from the DigitalOcean site, then go to your arch terminal and running the command
+Copy your personal access token from the DigitalOcean site, then go to your arch terminal and running the command.
 ```
 doctl auth init --context <NAME>
 ```
@@ -153,6 +155,8 @@ doctl compute ssh-key "<KEYNAME>" create --public-key "<Paste your key in here>"
 where you name your key and paste your public SSH key in the following brackets.
 - `doctl compute ssh-key create`: Adds a new SSH key to your account[^3].
 - `--public-key`: Key contents[^3].
+
+Congratulations, you have now finished installing Doctl[^6].
 
 ## Task 3: Creating a Cloud-init file
 This task will help you create and configure the Cloud-init file.
@@ -296,9 +300,43 @@ doctl compute droplet create <droplet name> --size s-1vcpu-1gb-amd --region Sfo3
 doctl compute droplet list --format ID,Name,PublicIPv4 | grep <droplet name>
 ```
 - `doctl compute droplet list`: Shows a list of all droplets on your account[^3].
-Make sure you record the `PublicIPv4` since you will need this later to connect to your local machine.
+Make sure to have the IPv4 for the next task to connect to your new droplet.
 
 You have now completed in making your droplet.
+
+## Task 5: Connecting the droplet using the VM
+You will now connect to your new droplet by using the VM.
+
+1. Run the following command 
+```
+nvim ~/.ssh/config
+```
+You will now be editing the configuration file inside the `.ssh` directory.
+
+2. Now paste the following code inside,
+```
+Host <Name for start up>
+  HostName <IPv4 address that you checked earlier>
+  User <Your username that you put in the Cloud-init file>
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/doctl-key
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+```
+Now save the changes and exit.
+
+3. Now run the command,
+```
+ssh -i .ssh/doctl-key <Username>@<Public IPv4 Address>
+```
+You should now be logged in the VM.
+
+4. If you want to continue to log in the VM, just run
+```
+ssh <Name for start up>
+```
+
+Congratulations, you have now set up a new droplet using Doctl!
 
 ## Sources
 
@@ -308,14 +346,14 @@ You have now completed in making your droplet.
 
 [^3]: https://docs.digitalocean.com/reference/doctl/reference/ 
 
-4. https://cloud.google.com/compute/docs/connect/create-ssh-keys 
+[^4]: https://cloud.google.com/compute/docs/connect/create-ssh-keys 
 
 [^5]: https://docs.cloud-init.io/en/latest/explanation/introduction.html 
 
-6. https://docs.digitalocean.com/reference/doctl/how-to/install/ 
+[^6]: https://docs.digitalocean.com/reference/doctl/how-to/install/ 
 
 [^7]: https://ss64.com/bash/ 
 
-8. https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
+[^8]: https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
 
 [^9]: https://www.redhat.com/sysadmin/pipes-command-line-linux 
