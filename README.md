@@ -73,16 +73,16 @@ sudo pacman -S doctl
 
 2. **Create an API token**
 Now we will create an API token and make it so it grants account access to doctl. Go to your DigitalOcean account, then on the left hand dashboard, click on **API**
-![[/assests/dashboard.png|100]]
+<img src="assests/dashboard.png" alt="dashboard" width="150"/>
 
 Click **Generate New Token**
-![[/assests/generate_new_token.png|350]]
+<img src="assests/generate_new_token.png.png" alt="generate_new_token" width="450"/>
 
 Enter your token name
-![[/assests/token_name.png|350]]
+<img src="assests/token_name.png" alt="token_name" width="450"/>
 
 Select **Full Access**, this will grant you the token all scopes available
-![[/assests/full_access.png|350]]
+<img src="assests/full_access.png" alt="full_access" width="450"/>
 
 Click **Generate Token**
 
@@ -96,9 +96,9 @@ doctl auth init --context <NAME>
 - --context: Specify a custom authentication context name (3).
 
 Now there will be a prompt 
-![[/assests/enter_access_token.png|150]]
+<img src="assests/enter_access_token.png" alt="enter_access_token" width="250"/>
 Paste your personal access token from the DigitalOcean site. You should get a confirmation: 
-![[/assests/validating_token.png|150]]
+<img src="assests/validating_token.png" alt="dashboard" width="450"/>
 
 Now we will switch to your account by running 
 ```
