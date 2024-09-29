@@ -1,6 +1,6 @@
 # How to Set Up a Arch Linux Droplet Using Doctl
 
-### Table of Contents
+## Table of Contents
 
 1. [Introduction](#introduction)
 2. Task 1: [Creating SSH key](#task-1-creating-ssh-key)
@@ -143,7 +143,9 @@ cat ~/.ssh/doctl-key.pub
 your public SSH key should show up. Now copy the key.
 - `cat`: Show contents of a file all at once[^3].
 
-Then type the command (**Note: Do not copy this code as your clipboard will forget your SSH key that copied in the previous step**)
+Then type the command 
+>[!Note]
+>Do not copy this code as your clipboard will forget your SSH key that copied in the previous step
 ```
 doctl compute ssh-key "<KEYNAME>" create --public-key "<Paste your key in here>"
 ```
