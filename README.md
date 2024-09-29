@@ -228,6 +228,74 @@ Exit out of nvim again
 
 Now you have completed in making your Cloud-init YAML file inside the droplet directory.
 
+## Task 4: Making the droplet with the cloud-init file
+Now that you are done making a cloud-init file, you will now proceed to make a droplet using doctl. First you will need to find all the data necessary on your account to make the droplet.
+
+>[!Note]
+>Make sure **NOT** to run *clear* when running these following commands as you will need to have the ID's for your *project, arch image,* and *ssh-key* to copy and paste.
+
+1. Check if you have multiple projects on your Digital Ocean account by running,
+```
+doctl projects list --format Name,OwnerUUID
+```
+This command will show all your project names with each respective UUID,
+- `doctl projects list`: List details for your DigitalOcean projects[^3].
+- `--format`: Flag to return only the `Name` and `OwnerUUID` in this case[^3].
+
+![[Screenshot 2024-09-28 at 5.48.47 PM.png|500]]
+Now decide which project you want to use, for the droplet that you are going to make.
+
+2. If you have made multiple custom images on your DigitalOcean account, run this command to find your Arch Linux image.
+```
+doctl compute image list-user --format ID,Distribution | grep -i arch
+```
+- `doctl compute image list-user`: Lists all user-created images that you have uploaded to your account[^3].
+- `|` : Pipe operator, which takes the output from one command and uses it as an input for another[^9].
+- `grep`: Searches file(s) {In this case this searches the list of all images} for specific text[^7].
+- `-i `: Ignores case sensitivity[^7].
+
+Make sure you have your ID and the name "Arch Linux" as the output.
+![[Screenshot 2024-09-28 at 5.45.19 PM.png|500]]
+
+3. Run this command to find the ID of the *doctl* key you made and connected with your DigitalOcean account.
+```
+doctl compute ssh-key list --format ID,Name | grep doctl
+```
+- `doctl compute ssh-key list`: lists information on all SSH keys on your DigitalOcean account[^3].
+
+>[!Note]
+> If you made it under a different name, change the `doctl` part of the command after > *grep* to whatever name you made it as.
+
+Make sure you have the ID and the name of your SSH key that you made earlier.
+![[Screenshot 2024-09-28 at 5.47.12 PM.png|500]]
+
+4. Run this command to make your droplet,
+```
+doctl compute droplet create <droplet name> --size s-1vcpu-1gb-amd --region Sfo3 --user-data-file ~/droplet/cloud-init --project-id <Paste your Project UUID> --image <Paste your Arch Linux image ID> --ssh-keys <Paste your SSH key ID>
+```
+- `doctl compute droplet create`: Creates a new Droplet on your account[^3].
+- `--size`: A slug indicating the Droplet's number of vCPUs, RAM and disk size[^3].
+	- In this case we are using `s-1vcpu-1gb-amd` which is a Basic AMD with 1 GB CPU memory, 1 vCPU, and 10GB of Disk space.
+	- If you want more information on other slugs that are available type this command: 
+		`doctl compute size list`[^3].
+- `--region`: Slug to specify the region to create the Droplet in[^3].
+	- In this case we are using `Sfo3` which is in San Francisco Datacenter 3
+	- If you want more information on other valid region, type this command:
+		`doctl compute region list`[^3].
+- `--user-data-file`: The path to a file containing a Cloud-init YAML file to run on the Droplet's first boot[^3].
+- `--project-id`: The UUID of the project to assign the Droplet to[^3].
+- `--image`: An ID specifying the image to create the Droplet[^3].
+- `--ssh-keys`: A list of SSH keys to embed in the Droplet's root account[^3]
+
+5. Now let's confirm that we made our droplet by running the following command,
+```
+doctl compute droplet list --format ID,Name,PublicIPv4 | grep <droplet name>
+```
+- `doctl compute droplet list`: Shows a list of all droplets on your account[^3].
+Make sure you record the `PublicIPv4` since you will need this later to connect to your local machine.
+
+You have now completed in making your droplet.
+
 ## Sources
 
 [^1]: https://wiki.archlinux.org/title/Arch_Linux
