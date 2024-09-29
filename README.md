@@ -5,7 +5,8 @@
 1. Introduction
 2. Task 1: Creating SSH key
 3. Task 2: Installing Doctl
-4. Task 3: Cloud-init
+4. Task 3: Task 3: Creating a cloud-init file
+5. Task 4: Making the droplet with the cloud-init file
 
 ### Introduction
 
@@ -14,17 +15,23 @@ This tutorial will guide you through the steps that allows you to make your own 
 What is Arch Linux?
 Arch Linux is an open source Linux distribution which is a minimal base system, that can be configured by the users for what they want (1).
 
+What is a SSH key? 
+A key so that you can securely connect between your device and something else, in this case we are going to connect to a VM. You have a private and public key for this.
+
 What is a Droplet?
 Droplets from DigitalOcean are Linux-based Virtual Machines(VMs) that run on virtualized hardware (2).
 
 What is Doctl?
 Doctl is the DigitalOcean command line interface (CLI) (3).
 
+What is Cloud-init?
+Cloud-init is a tool that handles a range of tasks from setting hostname, configuring network interfaces, etc when a new instance is created. Mainly we will be using it to run a script. (5)
+
 By the end of this tutorial, you will be able to learn how to:
 - Create your own SSH keys on your local machine.
 - Install doctl on your Arch Linux machine.
 - Connect your Digital Ocean account to your Arch Linux machine using doctl. 
-- Use cloud-init to download all necessary packages through doctl.
+- Use cloud-init to download all necessary packages.
 - Create a new droplet using doctl.
 
 ### Task 1: Creating SSH key
