@@ -392,20 +392,29 @@ Congratulations, you have now set up a new droplet using Doctl!
 
 ## Sources
 
-[^1]: https://wiki.archlinux.org/title/Arch_Linux
+[^1]: https://wiki.archlinux.org/title/Arch_Linux 
+Arch Linux - ArchWiki. (n.d.).
 
-[^2]: https://www.digitalocean.com/products/droplets 
+[^2]: https://www.digitalocean.com/products/droplets
+DigitalOcean Droplets. (n.d.). 
 
 [^3]: https://docs.digitalocean.com/reference/doctl/reference/ 
+Command Line Interface (CLI) Reference for doctl | DigitalOcean Documentation. (n.d.).
 
 [^4]: https://cloud.google.com/compute/docs/connect/create-ssh-keys 
+Create SSH keys. (n.d.). Google Cloud. 
 
-[^5]: https://docs.cloud-init.io/en/latest/explanation/introduction.html 
+[^5]: https://docs.cloud-init.io/en/latest/explanation/introduction.html
+Introduction to cloud-init - cloud-init 24.3.1 documentation. (n.d.). 
 
-[^6]: https://docs.digitalocean.com/reference/doctl/how-to/install/ 
+[^6]: https://docs.digitalocean.com/reference/doctl/how-to/install/
+How to Install and Configure doctl | DigitalOcean Documentation. (n.d.). 
 
-[^7]: https://ss64.com/bash/ 
+[^7]: https://ss64.com/bash/
+An A-Z Index of the Linux command line - SS64.com. (n.d.). 
 
 [^8]: https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
+How to create a personal access token | DigitalOcean Documentation. (n.d.). 
 
 [^9]: https://www.redhat.com/sysadmin/pipes-command-line-linux 
+Khess. (2023, January 12). Working with pipes on the Linux command line. Enable Sysadmin.
