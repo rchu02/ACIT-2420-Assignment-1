@@ -58,3 +58,82 @@ to check if files "doctl-key", which is your private key (do not share this) and
 - ls: This is used to list all the files and directories in the current directory that you are in.
 
 Congratulations, you have now created your own SSH keys.
+
+### Task 2: Installing Doctl and Connecting DigitalOcean using an API.
+
+**Overview**: This task will help guide you to install doctl on your terminal and creating your first droplet using doctl.
+
+1. **Install Doctl**
+First run 
+```
+sudo pacman -S doctl
+```
+- sudo: Raises your privileges to run certain commands
+- pacman: Package manager from arch
+
+2. **Create an API token**
+Now we will create an API token and make it so it grants account access to doctl. Go to your DigitalOcean account, then on the left hand dashboard, click on **API**
+![[/assests/dashboard.png|100]]
+
+Click **Generate New Token**
+![[/assests/generate_new_token.png|350]]
+
+Enter your token name
+![[/assests/token_name.png|350]]
+
+Select **Full Access**, this will grant you the token all scopes available
+![[/assests/full_access.png|350]]
+
+Click **Generate Token**
+
+3. **Now use the API token to grant access to Doctl**
+Copy your personal access token from the DigitalOcean site, then go to your arch terminal and running the command
+```
+doctl auth init --context <NAME>
+```
+"NAME" is name you give you give to save the token.
+- doctl auth init: Initializes doctl to use a specific account (3).
+- --context: Specify a custom authentication context name (3).
+
+Now there will be a prompt 
+![[/assests/enter_access_token.png|150]]
+Paste your personal access token from the DigitalOcean site. You should get a confirmation: 
+![[/assests/validating_token.png|150]]
+
+Now we will switch to your account by running 
+```
+doctl auth switch --context <NAME>
+```
+Where "Name" is the input that you used when you initialized your authorization. 
+- switch: Allows you to switch between authentication contexts you have already created (3).
+
+Finally check if your account is connected by running
+```
+doctl account get
+```
+Where you can get the following details of your account profile (3):
+- Email address
+- Team
+- Account Droplet limit
+- Email verification status
+- UUID for the account
+- Account status (active or disabled).
+
+Confirm the details and now you have connected your account to your arch.
+
+4. Connect your SSH key to DigitalOcean
+
+First use the command,
+```
+cat ~/.ssh/doctl-key.pub
+```
+your public SSH key should show up. Now copy the key.
+- cat: Show contents of a file all at once (3).
+
+Then type the command (**Note: Do not copy this code as your clipboard will forget your SSH key that copied in the previous step**)
+```
+doctl compute ssh-key "<KEYNAME>" create --public-key "<Paste your key in here>"
+```
+where you name your key and paste your public SSH key in the following brackets.
+- doctl compute ssh-key create: Adds a new SSH key to your account (3).
+- --public-key: Key contents (3).
