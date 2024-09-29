@@ -5,7 +5,7 @@
 1. [Introduction](#introduction)
 2. Task 1: [Creating SSH key](#task-1-creating-ssh-key)
 3. Task 2: [Installing Doctl and Connecting DigitalOcean using an API](#task-2-installing-doctl-and-connecting-digitalocean-using-an-api)
-4. Task 3: [Creating a cloud-init file](#task-3-creating-a-cloudinit-file)
+4. Task 3: [Creating a cloud-init file](#task-3-creating-a-cloud-init-file)
 5. Task 4: [Making the droplet with the cloud-init file](#task-4-making-the-droplet-with-the-cloudinit-file)
 6. Task 5: [Connecting the droplet using the VM](#task-5-connecting-the-droplet-using-the-vm)
 7. [Sources](#sources)
